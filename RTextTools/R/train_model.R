@@ -1,5 +1,7 @@
 train_model <- function(container, algorithm=c("SVM","SLDA","BOOSTING","BAGGING","RF","GLMNET","TREE","NNET","MAXENT"), ...) {
-        
+        if (!container@can_train) {
+            stop("Looks like this container cannot be used to train algorithms!")
+        }
         # CLEAN UP FROM PREVIOUS MODEL TRAINED
         gc()
         
