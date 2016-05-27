@@ -35,7 +35,7 @@ raw <- SOQuestions
 
 
 
-base_data <- raw[1:200, ]
+base_data <- raw[1:2000, ]
 
 all_labels <- unique(base_data[, 2])
 all_labels <- all_labels[!is.na(all_labels)]
@@ -43,18 +43,18 @@ all_labels <- all_labels[!is.na(all_labels)]
 doc_matrix <- create_matrix(base_data$Text, language="english", removeNumbers=TRUE,
                             stemWords=TRUE, removeSparseTerms = 0.998)
 
-container <- create_container(doc_matrix, base_data$Class, trainSize=1:100, 
-                              testSize=101:200, virgin=FALSE)
+container <- create_container(doc_matrix, base_data$Class, trainSize=1:500, 
+                              testSize=501:1700, virgin=FALSE)
 
-algs <- c(#'SVM'
-          #,'GLMNET'
-          #,'MAXENT'
-          'SLDA'
-          ,'BOOSTING'
-          ,'BAGGING'
-          #,'RF'
+algs <- c('SVM'
+          ,'GLMNET'
+          ,'MAXENT'
+          ,'SLDA'
+          #,'BOOSTING'
+          #,'BAGGING'
+          ,'RF'
           #,'NNET'
-          #,'TREE'
+          ,'TREE'
 )
 models <- train_models(container, algs)
 
